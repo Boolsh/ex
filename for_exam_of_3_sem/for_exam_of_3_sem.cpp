@@ -18,6 +18,7 @@ void add_zero_lvl(btree::ptrNODE node)
         add_zero_lvl(node->left); add_zero_lvl(node->right);
     }
 }
+
 int sum_chet(btree::BTREE& t)
 {
     int res{};
@@ -68,6 +69,7 @@ void del_last_lvl(btree::ptrNODE node)
         }
     }
 }
+
 int sum_lvl(btree::BTREE& t, int lvl)
 {
     int res{}, cur_lvl{ 0 };
@@ -92,15 +94,47 @@ int sum_lvl(btree::BTREE& t, int lvl)
     }
 
     return res;
+}  
+
+void del_last_letter(ttree::TTREE& tree, ttree::ptrNODE& root)
+{
+    
+    if (root)
+    {
+        for (int i = 0; i < 26; ++i)
+        {
+            if (root->ptrs[i])
+            {
+                if (root->ptrs[i]->eow)
+                {
+                    delete root->ptrs[i];
+                    root->ptrs[i] = nullptr;
+                    root->eow = true;
+                }
+                else
+                    del_last_letter(tree, root->ptrs[i]);
+            }
+        }
+    }
 }
 
-void del_last(ttree::ptrNODE t)
+void copy_last_letter(ttree::TTREE& tree, ttree::ptrNODE& root)
 {
-    if (t->eow)
-        delete t;
-    for (int i = 0; i < 26; i++)
-        if (t->ptrs[i])
-            del_last(t->ptrs[i]);
+    if (root)
+        for (int i = 0; i < 26; ++i)
+        {
+            if (root->ptrs[i])
+            {
+                if (root->ptrs[i]->eow)
+                {
+                    root->ptrs[i]->ptrs[i] = new ttree::NODE();
+                    root->ptrs[i]->eow = false;
+                    root->ptrs[i]->ptrs[i]->eow = true;
+                }
+                else
+                    copy_last_letter(tree, root->ptrs[i]);
+            }
+        }
 }
 
 A operator+ (A a1, A a2) 
@@ -119,6 +153,9 @@ int main()
 
 
     ttree::TTREE trie("trie_test.txt");
+    trie.print(0);
+    ttree::ptrNODE root = trie.get_root();
+    del_last_letter(trie, root);
     trie.print(0);
     //btree::BTREE tree("test.txt");
     //tree.print();

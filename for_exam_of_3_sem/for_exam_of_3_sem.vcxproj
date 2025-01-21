@@ -129,7 +129,9 @@
   <ItemGroup>
     <ClCompile Include="Binary_Tree.cpp" />
     <ClCompile Include="for_exam_of_3_sem.cpp" />
-    <ClCompile Include="podgotovkaEkz1.cpp" />
+    <ClCompile Include="podgotovkaEkz1.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Trie_Tree.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <fstream>
-
+#include <string>
 class A
 {
 private:
@@ -19,8 +19,8 @@ public:
 
 namespace btree
 {
-
 	using TInfo = int;
+
 
 	struct NODE
 	{
@@ -51,13 +51,12 @@ namespace btree
 		{
 			return root;
 		}
-		void set_root(ptrNODE ptr)
+		void set_root(ptrNODE& ptr)
 		{
 			root = ptr;
 		}
 		~BTREE();
 		void print(std::ostream& stream = std::cout);
-		void clear(ptrNODE& ptr);
+		static void clear(ptrNODE& ptr);
 	};
-
 }

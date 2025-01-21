@@ -40,6 +40,4 @@ namespace ttree
 		~TTREE();
 		void print(bool words, std::ostream& stream = std::cout);
 	};
-	// -------------------------------------
-	void printW(ttree::ptrNODE t, std::string word);
 }

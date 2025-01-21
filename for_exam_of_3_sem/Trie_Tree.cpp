@@ -87,11 +87,3 @@ void ttree::TTREE::print(bool words, std::ostream & stream)
 		print_vines(root, "");
 }
 
-void ttree::printW(ttree::ptrNODE t, std::string word)
-{
-		if (t->eow)
-			std::cout << word << std::endl;
-		for (int i = 0; i < 26; i++)
-			if (t->ptrs[i])
-				printW(t->ptrs[i], word + char(i + 'a'));
-}
